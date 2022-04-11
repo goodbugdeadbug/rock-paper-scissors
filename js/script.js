@@ -1,12 +1,7 @@
-// generate computerSelection
-
-
-
-
-//request playerSelection
+//request player input
 function playerInput () {
     let goodInput = false;
-    console.log(goodInput);
+    //console.log(goodInput);
     while (goodInput === false) {
         let playerSelection = prompt("Type in your choise: Rock, Paper or Scissors.");
         //console.log(playerSelection);
@@ -22,8 +17,9 @@ function playerInput () {
             //return;
         }
     }
-    }
+}
 
+//generate computer input
 function computerPlay (){
     const selectionArray = ['Rock','Paper','Scissors']
     computerSelection = selectionArray[Math.floor(Math.random()*3)]; //const randomElement = array[Math.floor(Math.random() * array.length)];
@@ -33,43 +29,48 @@ function computerPlay (){
     //console.log(computerSelection);
 }
 
-
-
 function playRound () {
     let playerSelection = playerInput();
     console.log("Player choice:", playerSelection);
     let computerSelection = computerPlay();
     console.log("Computer choice:", computerSelection);
-    let resultWon = false;
+    //let resultWon = false;
 if (playerSelection == computerSelection) {
     console.log('Draw!')
+    return false;
 } else if (playerSelection=='rock' && computerSelection=='paper' ) {
     console.log('Rock loses to Paper! You lost!')
+    return false;
 } else if (playerSelection=='rock' && computerSelection=='scissors' ) {
     console.log('Rock beats to Paper! You won!')
-    resultWon = true;
+    return true;
 } else if (playerSelection=='paper' && computerSelection=='rock' ) {
     console.log('Paper beats Rock! You won!')
-    resultWon = true;
+    return true;
 } else if (playerSelection=='paper' && computerSelection=='scissors' ) {
     console.log('Paper loses to scissors! You lost!')
+    return false;
 } else if (playerSelection=='scissors' && computerSelection=='paper' ) {
     console.log('Scissors beat Paper! You won!')
-    resultWon = true;
+    return true;
 } else if (playerSelection=='scissors' && computerSelection=='rock' ) {
     console.log('Scissors lose to Rock! You lost')
+    return false;
 } else {
-    console.log('SOMETHING WENT WRONG!')
+    console.log('ERROR in playRound() SOMETHING WENT WRONG!')
 }
 }
 function game () {
+    console.log('GAME START')
     let winCounter = 0
     for (let i =0; i < 5; i++){
-    playRound();
-    console.log(winCounter)
-    console.log('PLAYING!')
-
+    console.log('Round', i+1)
+    //console.log('Initializing playRound')
+    if (playRound () == true){winCounter++}    
+    //console.log('Completed playRound')    
     }
+    console.log('You won', winCounter, 'round(s)!')
+
 }
 
 game();
